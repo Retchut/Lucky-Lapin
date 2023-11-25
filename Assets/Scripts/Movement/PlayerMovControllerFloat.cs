@@ -89,9 +89,9 @@ public class PlayerMovControllerFloat : MonoBehaviour
 
     void Start()
     {
-        inputHandler.input_jump.Onpressed.Subscribe(eventHandler, Jump);
-        inputHandler.input_sprint.Onpressed.Subscribe(eventHandler, () => isSprinting = true);
-        inputHandler.input_sprint.Onreleased.Subscribe(eventHandler, () => isSprinting = false);
+        //inputHandler.input_jump.Onpressed.Subscribe(eventHandler, Jump);
+        //inputHandler.input_sprint.Onpressed.Subscribe(eventHandler, () => isSprinting = true);
+        //inputHandler.input_sprint.Onreleased.Subscribe(eventHandler, () => isSprinting = false);
 
         offsetChild.position += Vector3.up * offsetValue;
     }
