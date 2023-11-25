@@ -13,4 +13,22 @@ public class Bullet : MonoBehaviour
     {
         transform.position += transform.forward * data.speed;
     }
+
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "EnemyHitbox")
+        {
+            var enemyLogic = other.attachedRigidbody.GetComponent<EnemnyLogicManager>();
+            enemyLogic.BulletHit();
+            gameObject.SetActive(false);
+        }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        //if(collision.collider.gameObject.layer!= LayerMask.NameToLayer("Enemy"))
+        //gameObject.SetActive(false);
+
+    }
 }
