@@ -1,0 +1,93 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-7601356593925516434
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 639247ca83abc874e893eb93af2b5e44, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 0
+--- !u!21 &2100000
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Sky
+  m_Shader: {fileID: -6465566751694194690, guid: 8699bd91e9cd1df41bd53ee265caf145,
+    type: 3}
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - unity_Lightmaps:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_LightmapsInd:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_ShadowMasks:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _BUILTIN_QueueControl: 0
+    - _BUILTIN_QueueOffset: 0
+    - _Clouds: 1
+    - _Clouds_Det_Size: 8.44
+    - _Clouds_Opacity: 1.12
+    - _Clouds_Scarcity: 19.21
+    - _Clouds_Size: -8.01
+    - _Float: 5.38
+    - _Float_1: 45.06
+    - _Ground_Gradient: 0.22
+    - _Ground_Offset: -0.58
+    - _QueueControl: 0
+    - _QueueOffset: 0
+    - _Star_Size: 0.74
+    - _Stars: 0
+    - _Stars_Density: 243.11
+    - _ToonShaded: 1
+    - _Toon_Clouds: 1
+    - _Toon_Sky: 0
+    m_Colors:
+    - _Clouds_Edge: {r: 0.3, g: 0.3, b: 0, a: 0}
+    - _Ground_Color: {r: 1, g: 0.3114576, b: 0.2396226, a: 0}
+    - _Sky_Color: {r: 1, g: 0.5850064, b: 0.4078431, a: 0}
+    - _Stars_Color: {r: 1.0027281, g: 2.7960997, b: 3.4822016, a: 0}
+    - _Stars_Tilling: {r: 1.42, g: 0.85, b: 0, a: 0}
+    - _Vector2: {r: 1, g: 1, b: 0, a: 0}
+    - _Vector2_1: {r: 0, g: 0, b: 0, a: 0}
+    - _Vector2_2: {r: -1.48, g: 0, b: 0, a: 0}
+    - _Vector2_3: {r: 4.72, g: 2.12, b: 0, a: 0}
+  m_BuildTextureStacks: []
+--- !u!114 &774837248406402204
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0353a89b1f911e48b9e16bdc9f2e058, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 7
