@@ -22,13 +22,13 @@ public class BaseInputHandler : MonoBehaviour
 
     private void Awake()
     {
-        socket = new WebSocket("ws://" + url + ":" + port);
-        socket.OnOpen += (sender, e) =>
-            Debug.Log(e.ToString());
-        socket.OnMessage += (sender, e) =>
-            Debug.Log(e.ToString());
+        //socket = new WebSocket("ws://" + url + ":" + port);
+        //socket.OnOpen += (sender, e) =>
+        //    Debug.Log(e.ToString());
+        //socket.OnMessage += (sender, e) =>
+        //    Debug.Log(e.ToString());
 
-        socket.Connect();
+        //socket.Connect();
 
         input = GetComponent<PlayerInput>();
 
