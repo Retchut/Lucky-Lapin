@@ -1,12 +1,21 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
+using SimpleJSON;
+using WebSocketSharp;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using static UEventHandler;
+using System;
 
 public class PlayerInputHandlerPlatformer : BaseInputHandler
 {
+
+    private const string SHOOT_BTN = "play";
+    private const string UP_BTN = "bet_2";
+    private const string DOWN_BTN = "play_18";
+    private const string LEFT_BTN = "play_8";
+    private const string RIGHT_BTN = "play_38";
+    private const string UP_BTN_ALT = "bet_6";
+    private const string DOWN_BTN_ALT = "bet_10";
+    private const string LEFT_BTN_ALT = "play_68";
+    private const string RIGHT_BTN_ALT = "play_88";
 
     // public BufferedButton input_bufferedJump = new BufferedButton { bufferTime = 2 };
     public Button<Vector2> input_move = new Button<Vector2>();
@@ -16,6 +25,49 @@ public class PlayerInputHandlerPlatformer : BaseInputHandler
     public Button<float> input_pause = new Button<float>();
     public Button<float> input_interact = new Button<float>();
 
+    private WebSocket socket;
+
+    protected override void Awake()
+    {
+        // connect to machine socket
+        try
+        {
+            socket = new WebSocket("ws://" + url + ":" + port);
+
+            socket.OnOpen += (sender, e) => { Debug.Log("Connected"); };
+            socket.OnError += (sender, e) => { Debug.Log("error: " + e); };
+
+            socket.OnMessage += (sender, e) =>
+            {
+                var n = JSON.Parse(e.Data);
+                int ascii_code = n["payload"]["data"]["ascii_code"];
+                string name = n["payload"]["data"]["name"]; // btn name
+                int input_address = n["payload"]["data"]["input_address"];
+                string input_state = n["payload"]["data"]["input_state"]; // button press - active | inactive
+                string output_state = n["payload"]["data"]["output_state"]; // button light - active | inactive
+                int output_address = n["payload"]["data"]["output_address"];
+                string type = n["payload"]["data"]["type"];
+                OnMachineInteract(name, input_state);
+            };
+
+            socket.Connect();
+        }
+        catch (ArgumentException e)
+        {
+            Debug.LogWarning("No socket url and port were defined - socket wasn't set up");
+        }
+
+        base.Awake();
+    }
+
+    private void OnDestroy()
+    {
+        if (socket != null && socket.IsAlive)
+        {
+            socket.Close();
+        }
+    }
+
 
     private void OnMove(InputValue inputValue) => SetInputInfo(input_move, inputValue);
     private void OnLook(InputValue inputValue) => SetInputInfo(input_look, inputValue);
@@ -23,5 +75,52 @@ public class PlayerInputHandlerPlatformer : BaseInputHandler
     private void OnSprint(InputValue inputValue) => SetInputInfo(input_sprint, inputValue);
     private void OnPause(InputValue inputValue) => SetInputInfo(input_pause, inputValue);
     private void OnInteract(InputValue inputValue) => SetInputInfo(input_interact, inputValue);
+    private void OnMachineInteract(string buttonName, string buttonState)
+    {
+        if (buttonState != "active" && buttonState != "inactive")
+        {
+            Debug.LogWarning("Invalid button state: " + buttonName + " - " + buttonState);
+            return;
+        }
 
+        // shoot button
+        if (buttonName == SHOOT_BTN)
+        {
+            SetMachineInputFloat(input_interact, isButtonActive(buttonState) ? 1.0f : 0.0f);
+            return;
+        }
+
+        // movement controls and failsafe
+        Vector2 newInput = new Vector2(0, 0);
+        switch (buttonName)
+        {
+            case UP_BTN_ALT:
+            case UP_BTN:
+                // up
+                newInput.y += isButtonActive(buttonState) ? 1.0f : -1.0f;
+                break;
+            case DOWN_BTN_ALT:
+            case DOWN_BTN:
+                //down
+                newInput.y += isButtonActive(buttonState) ? -1.0f : 1.0f;
+                break;
+            case LEFT_BTN_ALT:
+            case LEFT_BTN:
+                // left
+                newInput.x += isButtonActive(buttonState) ? -1.0f : 1.0f;
+                break;
+            case RIGHT_BTN_ALT:
+            case RIGHT_BTN:
+                // right
+                newInput.x += isButtonActive(buttonState) ? 1.0f : -1.0f;
+                break;
+            default:
+                Debug.LogWarning("Unhandled button: " + buttonName + ": " + buttonState);
+                return;
+        }
+        IncrementMachineInputVector2(input_move, newInput);
+    }
+
+    // only called when buttonState is either "active" or "inactive" - no need to verify for any other case
+    private bool isButtonActive(string buttonState) => buttonState == "active";
 }
