@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 1.0557858, g: 0.26598993, b: 0.15664345, a: 1}
+  m_IndirectSpecularColor: {r: 0.32768434, g: 0.059431408, b: 0.3658244, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -548,7 +548,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 124006354}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.41574186, y: 0.0043696114, z: -0.0019974604, w: 0.90947}
+  m_LocalRotation: {x: 0.41574153, y: 0.0045011602, z: -0.0020575947, w: 0.90946937}
   m_LocalPosition: {x: 0, y: 6.0599976, z: -5.8399963}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -2577,6 +2577,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a88e90cf70bfe141891530b566d0b40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  url: 192.168.220.108
+  port: 3333
   devices: []
 --- !u!1 &631422413
 GameObject:
@@ -2813,7 +2815,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 686722868}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.41574186, y: 0.0043696114, z: -0.0019974604, w: 0.90947}
+  m_LocalRotation: {x: 0.41574153, y: 0.0045011602, z: -0.0020575947, w: 0.90946937}
   m_LocalPosition: {x: 0, y: 6.0599976, z: -5.8399963}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
