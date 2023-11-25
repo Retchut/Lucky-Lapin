@@ -85,6 +85,7 @@ Material:
     - _Fog: 0
     - _Fog_Clearance: 1
     - _Fog_Power: 18.36
+    - _Pixel: 350
     - _QueueControl: 0
     - _QueueOffset: 0
     - _Saturation: 1
