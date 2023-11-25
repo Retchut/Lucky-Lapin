@@ -1,8 +1,10 @@
+using WebSocketSharp;
 using System.Collections;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using static UEventHandler;
+using UnityEditor;
 
 [RequireComponent(typeof(PlayerInput))]
 
@@ -11,10 +13,23 @@ public class BaseInputHandler : MonoBehaviour
     public Camera playerCamera { get; private set; }
     public PlayerInput input { get; private set; }
 
+    public string url;
+    public string port;
+
     [SerializeField] private string[] devices;
+
+    private WebSocket socket;
 
     private void Awake()
     {
+        socket = new WebSocket("ws://" + url + ":" + port);
+        socket.OnOpen += (sender, e) =>
+            Debug.Log(e.ToString());
+        socket.OnMessage += (sender, e) =>
+            Debug.Log(e.ToString());
+
+        socket.Connect();
+
         input = GetComponent<PlayerInput>();
 
         if (input.camera == null)
@@ -22,6 +37,14 @@ public class BaseInputHandler : MonoBehaviour
         else
             playerCamera = input.camera;
         devices = input.devices.Select(x => x.name).ToArray();
+    }
+
+    private void OnDestroy()
+    {
+        if (socket != null && socket.IsAlive)
+        {
+            socket.Close();
+        }
     }
     public InputDevice GetMainInput() => input.devices.Count <= 0 ? null : input.devices[0];
     public void ChangeInputDevice(int inputId)
