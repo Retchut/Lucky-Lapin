@@ -1,8 +1,9 @@
 using SimpleJSON;
-using WebSocketSharp;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using System;
+
+using NativeWebSocket;
 
 public class PlayerInputHandlerPlatformer : BaseInputHandler
 {
@@ -27,44 +28,69 @@ public class PlayerInputHandlerPlatformer : BaseInputHandler
 
     private WebSocket socket;
 
-    protected override void Awake()
+    protected override async void Awake()
     {
+        base.Awake();
+
         // connect to machine socket
         try
         {
             socket = new WebSocket("ws://" + url + ":" + port);
 
-            socket.OnOpen += (sender, e) => { Debug.Log("Connected"); };
-            socket.OnError += (sender, e) => { Debug.Log("error: " + e); };
-
-            socket.OnMessage += (sender, e) =>
+            socket.OnOpen += () =>
             {
-                var n = JSON.Parse(e.Data);
-                int ascii_code = n["payload"]["data"]["ascii_code"];
-                string name = n["payload"]["data"]["name"]; // btn name
-                int input_address = n["payload"]["data"]["input_address"];
-                string input_state = n["payload"]["data"]["input_state"]; // button press - active | inactive
-                string output_state = n["payload"]["data"]["output_state"]; // button light - active | inactive
-                int output_address = n["payload"]["data"]["output_address"];
-                string type = n["payload"]["data"]["type"];
+                Debug.Log("Connection open!");
+            };
+
+            socket.OnError += (e) =>
+            {
+                Debug.Log("Error! " + e);
+            };
+
+            socket.OnClose += (e) =>
+            {
+                Debug.Log("Connection closed!");
+            };
+
+            socket.OnMessage += (bytes) =>
+            {
+                // getting the message as a string
+                string byteString = System.Text.Encoding.UTF8.GetString(bytes);
+                var packet = JSON.Parse(byteString);
+                int ascii_code = packet["payload"]["data"]["ascii_code"];
+                string name = packet["payload"]["data"]["name"]; // btn name
+                int input_address = packet["payload"]["data"]["input_address"];
+                string input_state = packet["payload"]["data"]["input_state"]; // button press - active | inactive
+                string output_state = packet["payload"]["data"]["output_state"]; // button light - active | inactive
+                int output_address = packet["payload"]["data"]["output_address"];
+                string type = packet["payload"]["data"]["type"];
                 OnMachineInteract(name, input_state);
             };
 
-            socket.Connect();
+            // waiting for messages
+            await socket.Connect();
         }
-        catch (ArgumentException e)
+        catch (UriFormatException e)
         {
             Debug.LogWarning("No socket url and port were defined - socket wasn't set up");
         }
-
-        base.Awake();
     }
 
-    private void OnDestroy()
+    void Update()
     {
-        if (socket != null && socket.IsAlive)
+#if !UNITY_WEBGL || UNITY_EDITOR
+        if (socket != null)
         {
-            socket.Close();
+            socket.DispatchMessageQueue();
+        }
+#endif
+    }
+
+    private async void OnDestroy()
+    {
+        if (socket != null)
+        {
+            await socket.Close();
         }
     }
 
