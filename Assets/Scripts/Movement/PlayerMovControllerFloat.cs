@@ -69,6 +69,7 @@ public class PlayerMovControllerFloat : MonoBehaviour
     [ReadOnly] public Vector3 vel;
     [ReadOnly] public Vector3 horizontalVel;
     [ReadOnly] public float horizontalVelMag;
+    [ReadOnly] public Vector3 horizontalDirection;
     [ReadOnly] public bool isFrozen;
 
     private UEventHandler eventHandler = new UEventHandler();
@@ -192,16 +193,16 @@ public class PlayerMovControllerFloat : MonoBehaviour
 
         //Get input direction and transform it to the camera orientation
         Vector2 move = inputHandler.input_move.value;
-        Vector3 transformedMove = inputHandler.playerCamera.transform.TransformDirection(new Vector3(move.x, 0, move.y));
-        transformedMove.y = 0;
+        horizontalDirection = inputHandler.playerCamera.transform.TransformDirection(new Vector3(move.x, 0, move.y));
+        horizontalDirection.y = 0;
 
         var goalVelocity = GetMoveVelocity();
         //Calculate necessary aceleration to achieve goal velocity
-        Vector3 aceleration = (transformedMove * goalVelocity - rb.velocity) / Time.fixedDeltaTime;
+        Vector3 aceleration = (horizontalDirection * goalVelocity - rb.velocity) / Time.fixedDeltaTime;
 
 
         //Check if new direction is facing or against current velocity
-        float dot = Vector3.Dot(transformedMove, rb.velocity);
+        float dot = Vector3.Dot(horizontalDirection, rb.velocity);
 
         if (dot >= 0)
             aceleration = Vector3.ClampMagnitude(aceleration, maxAccel);  //If positive or zero apply acceleration clamp
@@ -295,19 +296,21 @@ public class PlayerMovControllerFloat : MonoBehaviour
         return rb.velocity;
     }
 
-    public async void Knockback()
+    public async void Knockback(Vector3 direction)
     {
         bool isRight = horizontalVel.x > 0;
 
-        rb.AddForce(-rb.velocity.normalized * knockBackHorForce, ForceMode.Impulse);
+        rb.AddForce(direction * knockBackHorForce, ForceMode.Impulse);
         //rb.AddForce(isRight ? transform.right : -transform.right * knockBackHorForce,ForceMode.Impulse);
         rb.AddForce(Vector3.up * knockBackVertForce, ForceMode.Impulse);
+
         isFrozen = true;
+
         isKnocked = true;
         //FreezePlayer();
         await Task.Delay(knockBackFreezeMs);
         isKnocked = false;
-
+        isFrozen = false;
         //FreezePlayer(true);
 
     }
@@ -322,7 +325,7 @@ public class PlayerMovControllerFloat : MonoBehaviour
     {
         if (!raycastMask.DoesMaskContainsLayer(collision.gameObject.layer)) return;
 
-        ContactPoint point= collision.GetContact(0);
+        ContactPoint point = collision.GetContact(0);
 
         var heightDif = transform.position.y - point.point.y;
 
