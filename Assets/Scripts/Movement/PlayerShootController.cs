@@ -45,7 +45,18 @@ public class PlayerShootController : MonoBehaviour
         bullet.data = bulletDataPlaceholder;
 
         //var direction = movController.horizontalVel.normalized;
-        var direction = gunModel.forward;
+        var direction = movController.horizontalDirection == Vector3.zero ? gunModel.forward : movController.horizontalDirection;
+
+        float rotDif = 15;
+        var dir2 = Quaternion.EulerAngles(new Vector3(0, rotDif)) * direction;
+        dir2 = -dir2;
+
+        var dir3 = Quaternion.EulerAngles(new Vector3(0, -rotDif)) * direction;
+        dir3 = -dir3;
+
+        Debug.DrawRay(transform.position, direction, Color.red, 5);
+        Debug.DrawRay(transform.position, dir2, Color.cyan, 5);
+        Debug.DrawRay(transform.position, dir3, Color.green, 5);
 
         bullet.transform.position = transform.position + direction * startingDistance + offset;
         bullet.transform.forward = direction;

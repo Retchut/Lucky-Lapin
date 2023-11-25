@@ -57,12 +57,15 @@ public class PlayerAnimControllerPlatformer : MonoBehaviour
 
         if (magnitude > 0 && vel != Vector3.zero)
         {
-            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(vel), rotationSpeed * Time.deltaTime);
+            if (movController.horizontalDirection != Vector3.zero)
+            {
+                transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(movController.horizontalDirection), rotationSpeed * Time.deltaTime);
+            }
             //transform.forward = Vector3.Lerp(transform.forward, vel, Time.deltaTime * rotationSpeed);
         }
-        rotation = transform.rotation;
-        horizontalDirection = Vector3.Scale(transform.forward, new Vector3(1, 0, 1));
-        Debug.DrawRay(transform.position, horizontalDirection);
+        //rotation = transform.rotation;
+        //horizontalDirection = Vector3.Scale(transform.forward, new Vector3(1, 0, 1));
+        //Debug.DrawRay(transform.position, horizontalDirection);
     }
 
     void Jump()

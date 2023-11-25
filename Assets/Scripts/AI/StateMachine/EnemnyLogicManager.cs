@@ -6,6 +6,7 @@ public class EnemnyLogicManager : LogicMachineManager
 {
 
     public PlayerMovControllerFloat playerMovController;
+    public TriggerChecker triggerChecker;
 
     public override void OnAwake()
     {
