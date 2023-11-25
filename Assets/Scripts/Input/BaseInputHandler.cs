@@ -1,4 +1,3 @@
-using WebSocketSharp;
 using System.Collections;
 using System.Linq;
 using UnityEngine;
@@ -18,18 +17,8 @@ public class BaseInputHandler : MonoBehaviour
 
     [SerializeField] private string[] devices;
 
-    private WebSocket socket;
-
-    private void Awake()
+    protected virtual void Awake()
     {
-        //socket = new WebSocket("ws://" + url + ":" + port);
-        //socket.OnOpen += (sender, e) =>
-        //    Debug.Log(e.ToString());
-        //socket.OnMessage += (sender, e) =>
-        //    Debug.Log(e.ToString());
-
-        //socket.Connect();
-
         input = GetComponent<PlayerInput>();
 
         if (input.camera == null)
@@ -39,13 +28,6 @@ public class BaseInputHandler : MonoBehaviour
         devices = input.devices.Select(x => x.name).ToArray();
     }
 
-    private void OnDestroy()
-    {
-        if (socket != null && socket.IsAlive)
-        {
-            socket.Close();
-        }
-    }
     public InputDevice GetMainInput() => input.devices.Count <= 0 ? null : input.devices[0];
     public void ChangeInputDevice(int inputId)
     {
@@ -103,6 +85,27 @@ public class BaseInputHandler : MonoBehaviour
     #endregion
 
     #region Info Setters
+    protected void SetMachineInputFloat(Button<float> button, float value)
+    {
+        var oldValue = button.value; // This is done to prevent OnPressed incorrect value reads  (if value was set before the invoke)
+        button.value = value;
+
+        if (value == 0)
+            button.Released();
+        else if (oldValue == 0)
+            button.Pressed();
+    }
+
+    protected void IncrementMachineInputVector2(Button<Vector2> button, Vector2 value)
+    {
+        var oldValue = button.value; // This is done to prevent OnPressed incorrect value reads  (if value was set before the invoke)
+        button.value += value;
+
+        if (value.magnitude == 0)
+            button.Released();
+        else if (oldValue.magnitude == 0)
+            button.Pressed();
+    }
     protected void SetInputInfo(Button<float> button, InputValue inputValue)
     {
         var value = inputValue.Get<float>();
