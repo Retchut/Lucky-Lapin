@@ -8,6 +8,8 @@ public class ChaseState : LogicMachineBehaviour<EnemnyLogicManager>
     public float chaseSpeed;
 
     public float turnSpeed;
+    public float maxY=3;
+    public float currentY;
 
     public override void OnAwake()
     {
@@ -33,6 +35,7 @@ public class ChaseState : LogicMachineBehaviour<EnemnyLogicManager>
 
 
         var direction = playerPos - currentPos;
+        direction.y = 0;
         direction.Normalize();
 
         transform.forward = Vector3.Slerp(transform.transform.forward, direction, Time.deltaTime * turnSpeed);
