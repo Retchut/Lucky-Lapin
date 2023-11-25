@@ -85,9 +85,10 @@ Material:
     - _Fog: 0
     - _Fog_Clearance: 1
     - _Fog_Power: 18.36
+    - _Pixel: 10.16
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _Saturation: 1
+    - _Saturation: 0.5
     m_Colors:
     - _Vector2: {r: 0, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []
