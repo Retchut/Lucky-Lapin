@@ -23,6 +23,8 @@ Material:
   m_Name: Sky
   m_Shader: {fileID: -6465566751694194690, guid: 8699bd91e9cd1df41bd53ee265caf145,
     type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
   m_InvalidKeywords: []
   m_LightmapFlags: 4
@@ -31,6 +33,7 @@ Material:
   m_CustomRenderQueue: -1
   stringTagMap: {}
   disabledShaderPasses: []
+  m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
@@ -70,7 +73,7 @@ Material:
     m_Colors:
     - _Clouds_Edge: {r: 0.3, g: 0.3, b: 0, a: 0}
     - _Ground_Color: {r: 1, g: 0.3114576, b: 0.2396226, a: 0}
-    - _Sky_Color: {r: 1, g: 0.5850064, b: 0.4078431, a: 0}
+    - _Sky_Color: {r: 0.78128153, g: 0.8853251, b: 0.89433956, a: 0}
     - _Stars_Color: {r: 1.0027281, g: 2.7960997, b: 3.4822016, a: 0}
     - _Stars_Tilling: {r: 1.42, g: 0.85, b: 0, a: 0}
     - _Vector2: {r: 1, g: 1, b: 0, a: 0}
