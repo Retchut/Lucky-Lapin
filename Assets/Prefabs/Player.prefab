@@ -2493,7 +2493,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4883664754661968683}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.4632862, y: 0.0042577884, z: -0.0022258905, w: 0.8861957}
+  m_LocalRotation: {x: 0.46328622, y: 0.004257788, z: -0.00222589, w: 0.8861957}
   m_LocalPosition: {x: 0, y: 10.279999, z: -7.5700073}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -3040,8 +3040,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a88e90cf70bfe141891530b566d0b40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  url: 
-  port: 
+  url: localhost
+  port: 3333
   devices: []
 --- !u!1 &5994132288076472696
 GameObject:
@@ -3415,7 +3415,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6728750404955319880}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.4632862, y: 0.0042577884, z: -0.0022258905, w: 0.8861957}
+  m_LocalRotation: {x: 0.46328622, y: 0.004257788, z: -0.00222589, w: 0.8861957}
   m_LocalPosition: {x: 0, y: 10.279999, z: -7.5700073}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -4077,7 +4077,7 @@ MonoBehaviour:
   rb: {fileID: 0}
   offsetChild: {fileID: 256518124401096669}
   offsetValue: -0.76
-  floatHeight: 1.6
+  floatHeight: 2
   springStrength: 90
   dampenStrength: 12
   minGroundHeight: 2
@@ -4158,8 +4158,8 @@ MonoBehaviour:
   lightSeconds: 0.1
   layerMask:
     serializedVersion: 2
-    m_Bits: 0
-  radius: 2.5
+    m_Bits: 64
+  radius: 4.5
 --- !u!1 &8824348821625353584
 GameObject:
   m_ObjectHideFlags: 0
