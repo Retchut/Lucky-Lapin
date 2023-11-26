@@ -3,7 +3,27 @@ guid: 1f4b6f80de6eb674fa18958fa0fb8311
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: INV_BrickWall_01
+    second: {fileID: 2100000, guid: 109ce54c9995fda4fb1d97025509e7d6, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: INV_Lens_01
+    second: {fileID: 2100000, guid: f8c5681917d8b96479d4a6d0fc40e8f1, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: INV_Wall_Vinho
+    second: {fileID: 2100000, guid: d6940c61ef787474696ad96075f7b4e7, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: inv_RedBlackChecker
+    second: {fileID: 2100000, guid: d6940c61ef787474696ad96075f7b4e7, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -48,7 +68,7 @@ ModelImporter:
     nodeNameCollisionStrategy: 1
     fileIdsGeneration: 2
     swapUVChannels: 0
-    generateSecondaryUV: 0
+    generateSecondaryUV: 1
     useFileUnits: 1
     keepQuads: 0
     weldVertices: 1

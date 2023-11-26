@@ -46,11 +46,13 @@ Material:
     - _Cutoff: 0.206
     - _DstBlend: 1
     - _DstBlendAlpha: 1
-    - _Metallic: 0.663
-    - _Smoothness: 0.55
+    - _Metallic: 0.481
+    - _Smoothness: 1
     - _Surface: 1
     - _ZWrite: 0
-    m_Colors: []
+    m_Colors:
+    - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []
 --- !u!114 &3344665465497010224
 MonoBehaviour:

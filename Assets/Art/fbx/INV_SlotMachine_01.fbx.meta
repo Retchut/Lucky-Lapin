@@ -3,7 +3,48 @@ guid: b0cd0635ca72eed47b2945c509a41afc
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: INV_BrickWall_01
+    second: {fileID: -4565884009001823619, guid: 3c2e2db8d2a14a74d938b5d3b3d24dcd,
+      type: 3}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: INV_SlotCenterPiece_MetalCircle_02
+    second: {fileID: 2100000, guid: 6705fc7339316e6489ab2b494cc1a28d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: INV_Wall_Vinho
+    second: {fileID: 2100000, guid: 1bd7c6c2f4bd9fd4183cdb9b296c0aa2, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Red
+    second: {fileID: 2100000, guid: 3fd0287f29b83704ba9f0ab6b23a874b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SlotMahcine
+    second: {fileID: 2100000, guid: e86ae9aff73ec96439de3600fa62c431, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: lambert1
+    second: {fileID: 2100000, guid: cdb39daac05a26a4f8a6ce862317d857, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: lambert11.003
+    second: {fileID: 2100000, guid: 28441e22dbe177f4da5a9cdb26746121, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: typeBlinn4
+    second: {fileID: 2100000, guid: 28441e22dbe177f4da5a9cdb26746121, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -48,7 +89,7 @@ ModelImporter:
     nodeNameCollisionStrategy: 1
     fileIdsGeneration: 2
     swapUVChannels: 0
-    generateSecondaryUV: 0
+    generateSecondaryUV: 1
     useFileUnits: 1
     keepQuads: 0
     weldVertices: 1
