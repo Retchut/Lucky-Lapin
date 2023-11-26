@@ -1,44 +1,44 @@
-using NaughtyAttributes;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using static UEventHandler;
 
 [RequireComponent(typeof(Collider))]
 public class TriggerChecker : MonoBehaviour
 {
-    [InfoBox("Do not forget that either this/other object needs a Rigidbody to TriggerCheck!", EInfoBoxType.Normal)]
-
-    public bool isChecking = true;
     public bool searchInRigidbody;
     public LayerMask layersToCheck;
     public string tagToSearch;
 
-    public bool hasObject { get; private set; }
+    public bool hasObject;
     public GameObject obj { get; private set; }
     public Rigidbody objRb { get; private set; }
 
     public UEvent<Transform> OnTriggered = new UEvent<Transform>();
 
+    public static bool DoesMaskContainsLayer(LayerMask layermask, int layer)
+    {
+        return layermask == (layermask | (1 << layer));
+    }
 
     private void Awake()
     {
-        hasObject = true;
+        hasObject = false;
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (!isChecking) return;
         if (!IsObject(other)) return;
 
         obj = searchInRigidbody ? other.attachedRigidbody.gameObject : other.gameObject;
         objRb = other.attachedRigidbody;
         hasObject = true;
 
-        OnTriggered.TryInvoke(obj.transform);
+        OnTriggered.TryInvoke(other.transform);
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (!isChecking) return;
         if (!IsObject(other)) return;
 
         obj = null;
@@ -50,13 +50,13 @@ public class TriggerChecker : MonoBehaviour
     {
         if (searchInRigidbody)
         {
-            if (!layersToCheck.DoesMaskContainsLayer(other.attachedRigidbody.gameObject.layer)) return false;
-            if (!string.IsNullOrEmpty(tagToSearch) && LayerMask.LayerToName(other.attachedRigidbody.gameObject.layer) == tagToSearch) return false;
+            if (!DoesMaskContainsLayer(layersToCheck, other.attachedRigidbody.gameObject.layer)) return false;
+            if (!string.IsNullOrEmpty(tagToSearch) && other.attachedRigidbody.gameObject.tag == tagToSearch) return false;
         }
         else
         {
-            if (!layersToCheck.DoesMaskContainsLayer(other.gameObject.layer)) return false;
-            if (!string.IsNullOrEmpty(tagToSearch) && LayerMask.LayerToName(other.gameObject.layer) == tagToSearch) return false;
+            if (!DoesMaskContainsLayer(layersToCheck, other.gameObject.layer)) return false;
+            if (!string.IsNullOrEmpty(tagToSearch) && other.gameObject.tag == tagToSearch) return false;
         }
 
         return true;

@@ -4,6 +4,7 @@ using UnityEngine.InputSystem;
 using System;
 
 using NativeWebSocket;
+using System.Collections.Generic;
 
 public class PlayerInputHandlerPlatformer : BaseInputHandler
 {
@@ -17,6 +18,20 @@ public class PlayerInputHandlerPlatformer : BaseInputHandler
     private const string DOWN_BTN_ALT = "bet_10";
     private const string LEFT_BTN_ALT = "play_68";
     private const string RIGHT_BTN_ALT = "play_88";
+
+    private const string ADD_EXPLODE_PACKET = "{\"id\":\"v1/hardware/led_strips/add_patterns\",\"payload\":[{\"id\":\"redflash\",\"metadata\":{\"dithering\":false,\"interpolation\":false,\"version\":[1,0,0]},\"pattern\":[{\"data\":[[\"#FF0000\"],[\"#FF0000\"],[\"#FF0000\"],[\"#FF0000\"],[\"#FF0000\"],[\"#FF0000\"],[\"#FF0000\"],[\"#FF0000\"]],\"type\":\"draw\"},{\"data\":1,\"type\":\"wait\"},{\"data\":[[\"#FFFFFF\"],[\"#FFFFFF\"],[\"#FFFFFF\"],[\"#FFFFFF\"],[\"#FFFFFF\"],[\"#FFFFFF\"],[\"#FFFFFF\"],[\"#FFFFFF\"]],\"type\":\"draw\"},{\"data\":1,\"type\":\"wait\"},{\"data\":{\"count\":2,\"jumpTo\":0},\"type\":\"djnz\"}]}],\"headers\":{}}";
+
+    private const string SET_EXPLODE_PACKET = "{\"id\":\"v1/hardware/led_strips/set_pattern\",\"payload\":\"redflash\",\"headers\":{}}";
+
+    // local register of which buttons are being pressed
+    // axis - isActive
+    private Dictionary<string, string> machineButtonsState = new Dictionary<string, string>(){
+    {"up", "inactive"},
+    {"down", "inactive"},
+    {"left", "inactive"},
+    {"right", "inactive"},
+    {"shoot", "inactive"}
+};
 
     // public BufferedButton input_bufferedJump = new BufferedButton { bufferTime = 2 };
     public Button<Vector2> input_move = new Button<Vector2>();
@@ -46,6 +61,7 @@ public class PlayerInputHandlerPlatformer : BaseInputHandler
             socket.OnOpen += () =>
             {
                 Debug.Log("Connection open!");
+                AddExplodeBlink();
             };
 
             socket.OnError += (e) =>
@@ -70,7 +86,7 @@ public class PlayerInputHandlerPlatformer : BaseInputHandler
                 string output_state = packet["payload"]["data"]["output_state"]; // button light - active | inactive
                 int output_address = packet["payload"]["data"]["output_address"];
                 string type = packet["payload"]["data"]["type"];
-                OnMachineInteract(name, input_state);
+                OnMachineButton(name, input_state);
             };
 
             // waiting for messages
@@ -107,7 +123,8 @@ public class PlayerInputHandlerPlatformer : BaseInputHandler
     private void OnSprint(InputValue inputValue) => SetInputInfo(input_sprint, inputValue);
     private void OnPause(InputValue inputValue) => SetInputInfo(input_pause, inputValue);
     private void OnInteract(InputValue inputValue) => SetInputInfo(input_interact, inputValue);
-    private void OnMachineInteract(string buttonName, string buttonState)
+    // OnMachineButton is not called by unity
+    private void OnMachineButton(string buttonName, string buttonState)
     {
         if (buttonState != "active" && buttonState != "inactive")
         {
@@ -116,43 +133,122 @@ public class PlayerInputHandlerPlatformer : BaseInputHandler
         }
 
         // shoot button
-        if (buttonName == SHOOT_BTN)
+        if (buttonName == SHOOT_BTN && CanToggleButton("shoot", buttonState))
         {
-            SetMachineInputFloat(input_interact, isButtonActive(buttonState) ? 1.0f : 0.0f);
+            SetMachineButtonState("shoot", buttonState);
+            SetMachineInputFloat(input_interact, (buttonState == "active") ? 1.0f : 0.0f);
             return;
         }
 
         // movement controls and failsafe
-        Vector2 newInput = new Vector2(0, 0);
+        // toggle buttons
         switch (buttonName)
         {
             case UP_BTN_ALT:
             case UP_BTN:
                 // up
-                newInput.y += isButtonActive(buttonState) ? 1.0f : -1.0f;
+                if (!CanToggleButton("up", buttonState))
+                {
+                    return;
+                }
+                SetMachineButtonState("up", buttonState);
                 break;
             case DOWN_BTN_ALT:
             case DOWN_BTN:
                 //down
-                newInput.y += isButtonActive(buttonState) ? -1.0f : 1.0f;
+                if (!CanToggleButton("down", buttonState))
+                {
+                    return;
+                }
+                SetMachineButtonState("down", buttonState);
                 break;
             case LEFT_BTN_ALT:
             case LEFT_BTN:
                 // left
-                newInput.x += isButtonActive(buttonState) ? -1.0f : 1.0f;
+                if (!CanToggleButton("left", buttonState))
+                {
+                    return;
+                }
+                SetMachineButtonState("left", buttonState);
                 break;
             case RIGHT_BTN_ALT:
             case RIGHT_BTN:
                 // right
-                newInput.x += isButtonActive(buttonState) ? 1.0f : -1.0f;
+                if (!CanToggleButton("right", buttonState))
+                {
+                    return;
+                }
+                SetMachineButtonState("right", buttonState);
                 break;
             default:
                 Debug.LogWarning("Unhandled button: " + buttonName + ": " + buttonState);
                 return;
         }
-        IncrementMachineInputVector2(input_move, newInput);
+
+        // build input
+        Vector2 newInput = new Vector2(0, 0);
+        if (machineButtonsState["left"] == "active")
+        {
+            newInput.x -= 1.0f;
+        }
+        if (machineButtonsState["right"] == "active")
+        {
+            newInput.x += 1.0f;
+        }
+        if (machineButtonsState["down"] == "active")
+        {
+            newInput.y -= 1.0f;
+        }
+        if (machineButtonsState["up"] == "active")
+        {
+            newInput.y += 1.0f;
+        }
+
+        // send to movement vector
+        SetMachineInputVector2(input_move, newInput);
     }
 
     // only called when buttonState is either "active" or "inactive" - no need to verify for any other case
-    private bool isButtonActive(string buttonState) => buttonState == "active";
+    private bool CanToggleButton(string buttonAction, string buttonState) => machineButtonsState[buttonAction] != buttonState;
+
+    private void SetMachineButtonState(string buttonAction, string newState) => machineButtonsState[buttonAction] = newState;
+
+    public void ResetMovement()
+    {
+        Debug.Log("resetting");
+        SetMachineInputVector2(input_move, new Vector2(0, 0)); // stop moving
+        SetMachineInputFloat(input_interact, 0.0f); // stop shooting
+        ResetMachineButtonStates(); // reset local register of which buttons are being pressed
+    }
+
+    // reset local register of which buttons are being pressed
+    private void ResetMachineButtonStates()
+    {
+        machineButtonsState["up"] = "inactive";
+        machineButtonsState["down"] = "inactive";
+        machineButtonsState["left"] = "inactive";
+        machineButtonsState["right"] = "inactive";
+        machineButtonsState["shoot"] = "inactive";
+    }
+
+    public async void SendWebSocketMessage(string msg)
+    {
+        if (socket.State == WebSocketState.Open)
+        {
+            // Sending plain text
+            await socket.SendText(msg);
+        }
+    }
+
+    private void AddExplodeBlink()
+    {
+        Debug.Log("adding");
+        SendWebSocketMessage(ADD_EXPLODE_PACKET);
+    }
+
+    public void PlayExplodeBlink()
+    {
+        Debug.Log("playing");
+        SendWebSocketMessage(SET_EXPLODE_PACKET);
+    }
 }

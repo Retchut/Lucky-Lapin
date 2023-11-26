@@ -7,6 +7,10 @@ public class PlayerShootController : MonoBehaviour
 {
     public static PlayerShootController instance;
 
+    public SoundUtils.Sound[] gunshotSounds;
+    public SoundUtils.Sound explosionSound;
+    public AudioSource gunshotAudioSource;
+
     public PlayerVFXManagerPlatformer vfxManager;
 
     public PlayerInputHandlerPlatformer inputHandler;
@@ -126,6 +130,8 @@ public class PlayerShootController : MonoBehaviour
 
     public async void ShowEffect()
     {
+        gunshotAudioSource.PlayRandomSound(gunshotSounds);
+
         RolletUIManager.instance.Next();
         shotLight.enabled = true;
         await Task.Delay(System.TimeSpan.FromSeconds(lightSeconds));
@@ -134,6 +140,7 @@ public class PlayerShootController : MonoBehaviour
 
     public void BlowUp()
     {
+        gunshotAudioSource.PlaySound(explosionSound);
         CameraShaker.instance.Shake(.4f);
 
         movController.Knockback(-gunModel.forward);
