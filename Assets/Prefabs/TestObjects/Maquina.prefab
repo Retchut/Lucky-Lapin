@@ -75,7 +75,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: b0cd0635ca72eed47b2945c509a41afc,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 1.8131
+      value: 1.6
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b0cd0635ca72eed47b2945c509a41afc,
         type: 3}
@@ -85,7 +85,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: b0cd0635ca72eed47b2945c509a41afc,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.36
+      value: -0.1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b0cd0635ca72eed47b2945c509a41afc,
         type: 3}
@@ -166,8 +166,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.360766, y: 2.3588421, z: 1.3443445}
-  m_Center: {x: 0.072477736, y: 0.61786795, z: -0.11061953}
+  m_Size: {x: 1.3, y: 2.3, z: 1}
+  m_Center: {x: 0.05, y: 0.5, z: 0}
 --- !u!4 &2293128550776093504 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: b0cd0635ca72eed47b2945c509a41afc,
