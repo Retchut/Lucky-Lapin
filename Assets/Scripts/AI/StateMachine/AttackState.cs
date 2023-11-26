@@ -27,6 +27,8 @@ public class AttackState : LogicMachineBehaviour<EnemnyLogicManager>
 
         manager.playerMovController.Knockback(direction);
 
+        HeartsUiManager.instance.TakeHit();
+
         await Task.Delay(System.TimeSpan.FromSeconds(attackDuration));
 
         logicAnimator.SetBool("Attack", false);

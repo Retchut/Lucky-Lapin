@@ -14,6 +14,8 @@ public class PlayerVFXManagerPlatformer : MonoBehaviour
     public AnimationCurve dustCurve;
     int dustRateVar, dustJumpVar, dustLandVar;
 
+
+    public VisualEffect explosionVfx;
     //[Header("Knock")]
     //public VisualEffect knockVfx;
     //int aliveVar;
@@ -43,6 +45,10 @@ public class PlayerVFXManagerPlatformer : MonoBehaviour
     }
 
 
+    public void Explode()
+    {
+        explosionVfx.SendEvent("OnExplosion");
+    }
     private void Jump()
     {
         //if (!jumpFlag) return;

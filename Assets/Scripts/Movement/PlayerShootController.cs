@@ -5,6 +5,10 @@ using UnityEngine;
 
 public class PlayerShootController : MonoBehaviour
 {
+    public static PlayerShootController instance;
+
+    public PlayerVFXManagerPlatformer vfxManager;
+
     public PlayerInputHandlerPlatformer inputHandler;
     public PlayerMovControllerFloat movController;
     public Transform gunModel;
@@ -32,6 +36,7 @@ public class PlayerShootController : MonoBehaviour
 
     private void Awake()
     {
+        instance = this;
         shotLight.enabled = false;
     }
     void Start()
@@ -47,7 +52,11 @@ public class PlayerShootController : MonoBehaviour
 
     public void Shoot()
     {
+
+
         if (inputHandler.input_interact.value <= 0) return;
+
+        if (!RolletUIManager.instance.TestShoot()) return;
 
         float currentShootTime = Time.time;
 
@@ -117,10 +126,20 @@ public class PlayerShootController : MonoBehaviour
 
     public async void ShowEffect()
     {
-
+        RolletUIManager.instance.Next();
         shotLight.enabled = true;
         await Task.Delay(System.TimeSpan.FromSeconds(lightSeconds));
         shotLight.enabled = false;
+    }
+
+    public void BlowUp()
+    {
+        CameraShaker.instance.Shake(.4f);
+
+        movController.Knockback(-gunModel.forward);
+
+        vfxManager.Explode();
+        HeartsUiManager.instance.PutToSoro();
     }
 
 }

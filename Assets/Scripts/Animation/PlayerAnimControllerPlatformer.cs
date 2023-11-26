@@ -44,7 +44,7 @@ public class PlayerAnimControllerPlatformer : MonoBehaviour
 
     void Update()
     {
-        animator.SetBool("Sprint", movController.isSprinting);
+        //animator.SetBool("Sprint", movController.isSprinting);
 
         var vel = movController.rb.velocity;
         vel.y = 0;
