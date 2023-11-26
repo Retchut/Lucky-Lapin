@@ -57,10 +57,10 @@ AnimatorStateMachine:
     m_Position: {x: 310, y: 110, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -1037077330280050390}
-    m_Position: {x: 420, y: 20, z: 0}
+    m_Position: {x: 400, y: 20, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 8273089981267991353}
-    m_Position: {x: 240, y: -50, z: 0}
+    m_Position: {x: 230, y: -50, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions:
   - {fileID: -5746691376978003196}
@@ -114,13 +114,13 @@ AnimatorController:
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: Death
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   m_AnimatorLayers:
   - serializedVersion: 5
     m_Name: Base Layer
@@ -146,7 +146,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 778ebd61a8451d447b1115c3d1768f6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackDuration: 1
+  attackDuration: 1.7
+  attackDelay: 0.5
+  isMelee: 1
+  attackTrigger: Flop
 --- !u!1102 &4215311491521589399
 AnimatorState:
   serializedVersion: 6
@@ -237,8 +240,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b03ac4243cd0e6e4eb39ff49fb48c17a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  knockForceHorizontal: 28
-  knockForceV: 9
+  knockForceHorizontal: 9
+  knockForceV: 3
   delayToDisable: 1.5
 --- !u!1102 &8273089981267991353
 AnimatorState:

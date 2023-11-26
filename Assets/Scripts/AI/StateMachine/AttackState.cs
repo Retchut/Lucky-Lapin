@@ -6,7 +6,9 @@ using UnityEngine;
 public class AttackState : LogicMachineBehaviour<EnemnyLogicManager>
 {
     public float attackDuration;
-
+    public float attackDelay = 1.5f;
+    public bool isMelee = true;
+    public string attackTrigger;
 
     public override void OnAwake()
     {
@@ -22,16 +24,28 @@ public class AttackState : LogicMachineBehaviour<EnemnyLogicManager>
         direction.y = 0;
         direction.Normalize();
 
-        if (!manager.triggerChecker.hasObject) return;
+        manager.animator.SetTrigger(attackTrigger);
 
+        manager.mainCollider.enabled = false;
+        manager.body.isKinematic = true;
 
-        manager.playerMovController.Knockback(direction);
+        await Task.Delay(System.TimeSpan.FromSeconds(attackDelay));
 
-        HeartsUiManager.instance.TakeHit();
+        //Debug.Log("AttacK");
+        CameraShaker.instance.Shake(0.25f, true);
+
+        if (manager.triggerChecker.hasObject)
+        {
+            manager.playerMovController.Knockback(direction);
+            HeartsUiManager.instance.TakeHit();
+        }
 
         await Task.Delay(System.TimeSpan.FromSeconds(attackDuration));
-
         logicAnimator.SetBool("Attack", false);
+        manager.mainCollider.enabled = true;
+        manager.body.isKinematic = false;
+
+
     }
 
     public override void OnExit()

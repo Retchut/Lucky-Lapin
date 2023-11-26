@@ -16,6 +16,9 @@ public class LevelManager : MonoBehaviour
 
     public async void GameOver()
     {
+        PlayerMovControllerFloat.instance.enabled = false;
+        PlayerShootController.instance.enabled = false;
+
         if (FadeScreenController.instance != null)
         {
             FadeScreenController.instance.FadeOut();

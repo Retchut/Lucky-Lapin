@@ -16,6 +16,8 @@ public class DeathState : LogicMachineBehaviour<EnemnyLogicManager>
     public override async void OnEnter()
     {
         manager.mainCollider.enabled = false;
+        manager.body.isKinematic = false;
+
         manager.body.AddForce(-transform.forward * knockForceHorizontal, ForceMode.Impulse);
         manager.body.AddForce(Vector3.up * knockForceV, ForceMode.Impulse);
 
