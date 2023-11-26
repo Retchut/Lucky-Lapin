@@ -70,7 +70,7 @@ public class PlayerInputHandlerPlatformer : BaseInputHandler
                 string output_state = packet["payload"]["data"]["output_state"]; // button light - active | inactive
                 int output_address = packet["payload"]["data"]["output_address"];
                 string type = packet["payload"]["data"]["type"];
-                OnMachineInteract(name, input_state);
+                OnMachineButton(name, input_state);
             };
 
             // waiting for messages
@@ -107,7 +107,7 @@ public class PlayerInputHandlerPlatformer : BaseInputHandler
     private void OnSprint(InputValue inputValue) => SetInputInfo(input_sprint, inputValue);
     private void OnPause(InputValue inputValue) => SetInputInfo(input_pause, inputValue);
     private void OnInteract(InputValue inputValue) => SetInputInfo(input_interact, inputValue);
-    private void OnMachineInteract(string buttonName, string buttonState)
+    private void OnMachineButton(string buttonName, string buttonState)
     {
         if (buttonState != "active" && buttonState != "inactive")
         {
