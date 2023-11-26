@@ -7,8 +7,6 @@ using UnityEngine.SceneManagement;
 public class LevelManager : MonoBehaviour
 {
     public static LevelManager instance;
-    public PlayerInputHandlerPlatformer playerInputHandlerPlatformer;
-
 
     public float delayToRestart = 1.5f;
     private void Awake()
@@ -20,7 +18,6 @@ public class LevelManager : MonoBehaviour
     {
         if (FadeScreenController.instance != null)
         {
-            playerInputHandlerPlatformer.ResetMovement();
             FadeScreenController.instance.FadeOut();
             await Task.Delay(System.TimeSpan.FromSeconds(delayToRestart));
         }
