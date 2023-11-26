@@ -32,6 +32,12 @@ public class PlayerInputHandlerPlatformer : BaseInputHandler
     {
         base.Awake();
 
+        if (!Application.isEditor)
+        {
+            url = "localhost";
+            port = "3333";
+        }
+
         // connect to machine socket
         try
         {
