@@ -60,9 +60,6 @@ server.on("connection", (socket) => {
   // Handle messages from the client
   socket.on("message", (message) => {
     console.log(`Received message: ${message}`);
-
-    // Send a response back to the client
-    // socket.send(`Server received your message: ${message}`);
   });
 
   // Handle the connection close
@@ -98,14 +95,38 @@ server.on("connection", (socket) => {
   });
 
   // Test multiple equal payloads
-  // setTimeout(() => sendPayload(socket, getPayload(RIGHT_BTN, "active")), 3000);
-  // setTimeout(() => sendPayload(socket, getPayload(RIGHT_BTN, "active")), 4000);
-  // setTimeout(() => sendPayload(socket, getPayload(RIGHT_BTN, "active")), 5000);
-  // setTimeout(() => sendPayload(socket, getPayload(RIGHT_BTN, "active")), 6000);
-  // setTimeout(() => sendPayload(socket, getPayload(RIGHT_BTN, "inactive")), 8000);
-  // setTimeout(() => sendPayload(socket, getPayload(RIGHT_BTN, "inactive")), 9000);
-  // setTimeout(() => sendPayload(socket, getPayload(RIGHT_BTN, "inactive")), 10000);
-  // setTimeout(() => sendPayload(socket, getPayload(RIGHT_BTN, "inactive")), 11000);
+  // setTimeout(() => {
+  //   console.log("activating right");
+  //   sendPayload(socket, getPayload(RIGHT_BTN, "active"));
+  // }, 3000);
+  // setTimeout(() => {
+  //   console.log("activating right");
+  //   sendPayload(socket, getPayload(RIGHT_BTN, "active"));
+  // }, 4000);
+  // setTimeout(() => {
+  //   console.log("activating right");
+  //   sendPayload(socket, getPayload(RIGHT_BTN, "active"));
+  // }, 5000);
+  // setTimeout(() => {
+  //   console.log("activating right");
+  //   sendPayload(socket, getPayload(RIGHT_BTN, "active"));
+  // }, 6000);
+  // setTimeout(() => {
+  //   console.log("disabling right");
+  //   sendPayload(socket, getPayload(RIGHT_BTN, "inactive"));
+  // }, 8000);
+  // setTimeout(() => {
+  //   console.log("disabling right");
+  //   sendPayload(socket, getPayload(RIGHT_BTN, "inactive"));
+  // }, 9000);
+  // setTimeout(() => {
+  //   console.log("disabling right");
+  //   sendPayload(socket, getPayload(RIGHT_BTN, "inactive"));
+  // }, 10000);
+  // setTimeout(() => {
+  //   console.log("disabling right");
+  //   sendPayload(socket, getPayload(RIGHT_BTN, "inactive"));
+  // }, 11000);
 });
 
 console.log("WebSocket server is running on port " + PORT);
