@@ -53,7 +53,7 @@ Material:
     m_Floats:
     - _BUILTIN_QueueControl: 0
     - _BUILTIN_QueueOffset: 0
-    - _Clouds: 1
+    - _Clouds: 0
     - _Clouds_Det_Size: 8.44
     - _Clouds_Opacity: 1.12
     - _Clouds_Scarcity: 19.21
@@ -68,12 +68,12 @@ Material:
     - _Stars: 0
     - _Stars_Density: 243.11
     - _ToonShaded: 1
-    - _Toon_Clouds: 1
+    - _Toon_Clouds: 0
     - _Toon_Sky: 0
     m_Colors:
     - _Clouds_Edge: {r: 0.3, g: 0.3, b: 0, a: 0}
-    - _Ground_Color: {r: 1, g: 0.3114576, b: 0.2396226, a: 0}
-    - _Sky_Color: {r: 0.78128153, g: 0.8853251, b: 0.89433956, a: 0}
+    - _Ground_Color: {r: 0, g: 0, b: 0, a: 0}
+    - _Sky_Color: {r: 0, g: 0, b: 0, a: 0}
     - _Stars_Color: {r: 1.0027281, g: 2.7960997, b: 3.4822016, a: 0}
     - _Stars_Tilling: {r: 1.42, g: 0.85, b: 0, a: 0}
     - _Vector2: {r: 1, g: 1, b: 0, a: 0}

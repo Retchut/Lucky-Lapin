@@ -28,7 +28,12 @@ public class EnemnyLogicManager : LogicMachineManager
     public Color randomColor;
     public override void OnAwake()
     {
-        if (colorMeshes != null && meshRandomColor != null && meshRandomColor.Length> 0)
+        if (playerMovController == null)
+        {
+            playerMovController = GameObject.Find("Player").transform.GetComponentInChildren<PlayerMovControllerFloat>();
+        }
+
+        if (colorMeshes != null && meshRandomColor != null && meshRandomColor.Length > 0)
         {
             randomColor = meshRandomColor[Random.Range(0, meshRandomColor.Length)];
 
