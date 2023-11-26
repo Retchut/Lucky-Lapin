@@ -37,6 +37,8 @@ public class PlayerShootController : MonoBehaviour
     public float lightSeconds = 0.1f;
     public UEventHandler eventHandler;
 
+    public LayerMask layerMask;
+    public float radius;
 
     private void Awake()
     {
@@ -45,26 +47,26 @@ public class PlayerShootController : MonoBehaviour
     }
     void Start()
     {
-        //inputHandler.input_interact.Onpressed.Subscribe(eventHandler, Shoot);
+        inputHandler.input_interact.Onpressed.Subscribe(eventHandler, Shoot);
     }
 
 
     private void Update()
     {
-        Shoot();
+        //Shoot();
     }
 
     public void Shoot()
     {
 
 
-        if (inputHandler.input_interact.value <= 0) return;
+        //if (inputHandler.input_interact.value <= 0) return;
 
-        if (!RolletUIManager.instance.TestShoot()) return;
+        //if (!RolletUIManager.instance.TestShoot()) return;
 
-        float currentShootTime = Time.time;
+        //float currentShootTime = Time.time;
 
-        if (lastShootTime != -1 && currentShootTime - lastShootTime <= fireRate) return;
+        //if (lastShootTime != -1 && currentShootTime - lastShootTime <= fireRate) return;
 
 
         var bullet = GameObject.Instantiate(bulletPlaceholder);
@@ -124,7 +126,7 @@ public class PlayerShootController : MonoBehaviour
         bullet.transform.position = transform.position + direction * startingDistance + offset;
         bullet.transform.forward = finalDirection;
 
-        lastShootTime = currentShootTime;
+        //lastShootTime = currentShootTime;
         ShowEffect();
     }
 
@@ -146,8 +148,18 @@ public class PlayerShootController : MonoBehaviour
         movController.Knockback(-gunModel.forward);
 
         vfxManager.Explode();
-        // HeartsUiManager.instance.PutToSoro();
         HeartsUiManager.instance.TakeHit();
+
+        var cols = Physics.OverlapSphere(gunModel.transform.position, radius, layerMask);
+
+        foreach (var col in cols)
+        {
+            EnemnyLogicManager a = null;
+            if (col.gameObject.TryGetComponent<EnemnyLogicManager>(out a))
+            {
+
+            };
+        }
     }
 
 }
