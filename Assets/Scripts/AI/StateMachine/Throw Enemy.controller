@@ -249,6 +249,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   knockForceHorizontal: 9
   knockForceV: 6
+  deathSounds:
+  - volume: 0
+    clip: {fileID: 8300000, guid: a38c1f708ff4e6847bf08579cf8dde0f, type: 3}
+  - volume: 0
+    clip: {fileID: 8300000, guid: f03da4cf31f1b694fa930f2db84617a9, type: 3}
   delayToDisable: 0.5
 --- !u!1102 &8273089981267991353
 AnimatorState:

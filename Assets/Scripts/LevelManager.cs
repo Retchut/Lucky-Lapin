@@ -9,6 +9,7 @@ public class LevelManager : MonoBehaviour
 {
     public static LevelManager instance;
 
+    [Scene]
     public string nextLvlName;
 
     public float delayToRestart = 1.5f;

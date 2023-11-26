@@ -7,6 +7,7 @@ public class DeathState : LogicMachineBehaviour<EnemnyLogicManager>
 {
     public float knockForceHorizontal;
     public float knockForceV;
+    public SoundUtils.Sound[] deathSounds;
 
     public float delayToDisable = 1.5f;
     public override void OnAwake()
@@ -29,6 +30,8 @@ public class DeathState : LogicMachineBehaviour<EnemnyLogicManager>
         DeathSpawnManager.instance.Spawn(transform.position);
 
         manager.modelContainer.gameObject.SetActive(false);
+
+        manager.aSource.PlayRandomSound(deathSounds);
 
         await Task.Delay(System.TimeSpan.FromSeconds(delayToDisable));
         manager.gameObject.SetActive(false);
