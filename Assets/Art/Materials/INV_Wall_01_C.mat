@@ -7,13 +7,11 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Carpet
+  m_Name: INV_Wall_01_C
   m_Shader: {fileID: 4800000, guid: 933532a4fcc9baf4fa0491de14d08ed7, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
-  m_ValidKeywords:
-  - _METALLICSPECGLOSSMAP
-  - _NORMALMAP
+  m_ValidKeywords: []
   m_InvalidKeywords: []
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -27,16 +25,16 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _BaseMap:
-        m_Texture: {fileID: 2800000, guid: 03f40a848fb8669418c631bf45310ed6, type: 3}
+        m_Texture: {fileID: 2800000, guid: 4cf8f41bf9f49df42bf6d1fd55ff2e41, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
-        m_Texture: {fileID: 2800000, guid: 8a96ed83c6ea8574f8428e7e1f61cd8d, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _DetailAlbedoMap:
         m_Texture: {fileID: 0}
-        m_Scale: {x: 15, y: 15}
+        m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _DetailMask:
         m_Texture: {fileID: 0}
@@ -51,11 +49,11 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 03f40a848fb8669418c631bf45310ed6, type: 3}
+        m_Texture: {fileID: 2800000, guid: 4cf8f41bf9f49df42bf6d1fd55ff2e41, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
-        m_Texture: {fileID: 2800000, guid: 5f27669280ae07147856907990a232aa, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _OcclusionMap:
@@ -106,7 +104,7 @@ Material:
     - _Parallax: 0.005
     - _QueueOffset: 0
     - _ReceiveShadows: 1
-    - _Smoothness: 0.321
+    - _Smoothness: 0.5
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
@@ -120,7 +118,7 @@ Material:
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
   m_BuildTextureStacks: []
---- !u!114 &2162257530290510639
+--- !u!114 &7123659032199889201
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
