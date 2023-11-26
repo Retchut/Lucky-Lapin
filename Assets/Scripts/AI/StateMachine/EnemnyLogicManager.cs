@@ -14,12 +14,17 @@ public class EnemnyLogicManager : LogicMachineManager
     public Animator animator;
     public ChipThrower chipThrower;
 
+    public Transform modelContainer;
+
     public MeshRenderer[] colorMeshes;
     public Color[] meshRandomColor;
 
     public MeshRenderer cardMesh;
     public Texture2D[] spriteRandomCard;
 
+    public AudioSource aSource;
+
+    public VisualEffect deathVfx;
     public Color randomColor;
     public override void OnAwake()
     {

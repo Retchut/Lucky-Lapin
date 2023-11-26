@@ -43,6 +43,14 @@ MonoBehaviour:
   turnSpeed: 5
   maxY: 600
   currentY: 451
+  walkingSounds:
+  - volume: 1
+    clip: {fileID: 8300000, guid: cc8ca1deecb75194cbfd50ef777e10d9, type: 3}
+  - volume: 1
+    clip: {fileID: 8300000, guid: 5cc3af88355bd824592c882144065db1, type: 3}
+  - volume: 1
+    clip: {fileID: 8300000, guid: 61a6de5f4f44a584eba048c1b0a064f0, type: 3}
+  footstepRate: 0.5
 --- !u!1107 &-1584729478329063459
 AnimatorStateMachine:
   serializedVersion: 6
@@ -54,10 +62,10 @@ AnimatorStateMachine:
   m_ChildStates:
   - serializedVersion: 1
     m_State: {fileID: 4215311491521589399}
-    m_Position: {x: 310, y: 110, z: 0}
+    m_Position: {x: 300, y: 110, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -1037077330280050390}
-    m_Position: {x: 400, y: 20, z: 0}
+    m_Position: {x: 390, y: 20, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 8273089981267991353}
     m_Position: {x: 230, y: -50, z: 0}
@@ -150,6 +158,7 @@ MonoBehaviour:
   attackDelay: 0.5
   isMelee: 1
   attackTrigger: Flop
+  rotationEase: 28
 --- !u!1102 &4215311491521589399
 AnimatorState:
   serializedVersion: 6
@@ -241,8 +250,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   knockForceHorizontal: 9
-  knockForceV: 3
-  delayToDisable: 1.5
+  knockForceV: 7
+  delayToDisable: 0.26
 --- !u!1102 &8273089981267991353
 AnimatorState:
   serializedVersion: 6

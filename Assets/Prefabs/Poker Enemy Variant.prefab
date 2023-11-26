@@ -329,6 +329,11 @@ PrefabInstance:
       objectReference: {fileID: 2412092529763957967}
     - target: {fileID: 777585363770838257, guid: 30ad7c0cbbd402040bfdfb8b6cb56bf2,
         type: 3}
+      propertyPath: modelContainer
+      value: 
+      objectReference: {fileID: 3856586076653772459}
+    - target: {fileID: 777585363770838257, guid: 30ad7c0cbbd402040bfdfb8b6cb56bf2,
+        type: 3}
       propertyPath: colorMeshes.Array.size
       value: 11
       objectReference: {fileID: 0}

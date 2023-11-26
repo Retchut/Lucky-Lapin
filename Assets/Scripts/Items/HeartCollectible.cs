@@ -17,6 +17,10 @@ public class HeartCollectible : MonoBehaviour
     public float finalSpinDuration = 5;
     public AnimationCurve finalSpinEase;
 
+    public SoundUtils.Sound[] heartsSounds;
+
+    public AudioSource aSource;
+
     UEventHandler eventHandler = new UEventHandler();
     private void Awake()
     {
@@ -36,6 +40,8 @@ public class HeartCollectible : MonoBehaviour
     {
         collected = true;
         HeartsUiManager.instance.GainHeart();
+
+        aSource.PlayRandomSound(heartsSounds);
 
         model.DORotate(Vector3.up * finalSpinAmnt, finalSpinDuration, RotateMode.WorldAxisAdd).SetEase(finalSpinEase);
         model.DOScale(0, finalSpinDuration).SetEase(finalSpinEase);

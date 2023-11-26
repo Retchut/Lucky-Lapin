@@ -21,6 +21,15 @@ public class DeathState : LogicMachineBehaviour<EnemnyLogicManager>
         manager.body.AddForce(-transform.forward * knockForceHorizontal, ForceMode.Impulse);
         manager.body.AddForce(Vector3.up * knockForceV, ForceMode.Impulse);
 
+
+        await Task.Delay(System.TimeSpan.FromSeconds(delayToDisable));
+
+        manager.deathVfx.SendEvent("OnExplode");
+
+        DeathSpawnManager.instance.Spawn(transform.position);
+
+        manager.modelContainer.gameObject.SetActive(false);
+
         await Task.Delay(System.TimeSpan.FromSeconds(delayToDisable));
         manager.gameObject.SetActive(false);
     }

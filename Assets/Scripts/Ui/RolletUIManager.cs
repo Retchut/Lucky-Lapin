@@ -8,6 +8,8 @@ using System.Threading.Tasks;
 
 public class RolletUIManager : MonoBehaviour
 {
+    public AudioSource source;
+    public SoundUtils.Sound reloadSound;
     public static RolletUIManager instance;
     public RectTransform rollet;
 
@@ -121,6 +123,7 @@ public class RolletUIManager : MonoBehaviour
 
         currentIndex = 0;
 
+        source.PlaySound(reloadSound);
         for (int i = 0; i < bullets.Length; i++)
         {
             bullets[i].color = initColor;
