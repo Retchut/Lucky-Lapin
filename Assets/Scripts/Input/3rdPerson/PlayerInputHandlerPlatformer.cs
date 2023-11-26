@@ -19,6 +19,10 @@ public class PlayerInputHandlerPlatformer : BaseInputHandler
     private const string LEFT_BTN_ALT = "play_68";
     private const string RIGHT_BTN_ALT = "play_88";
 
+    private const string ADD_EXPLODE_PACKET = "{\"id\":\"v1/hardware/led_strips/add_patterns\",\"payload\":[{\"id\":\"redflash\",\"metadata\":{\"dithering\":false,\"interpolation\":false,\"version\":[1,0,0]},\"pattern\":[{\"data\":[[\"#FF0000\"],[\"#FF0000\"],[\"#FF0000\"],[\"#FF0000\"],[\"#FF0000\"],[\"#FF0000\"],[\"#FF0000\"],[\"#FF0000\"]],\"type\":\"draw\"},{\"data\":1,\"type\":\"wait\"},{\"data\":[[\"#FFFFFF\"],[\"#FFFFFF\"],[\"#FFFFFF\"],[\"#FFFFFF\"],[\"#FFFFFF\"],[\"#FFFFFF\"],[\"#FFFFFF\"],[\"#FFFFFF\"]],\"type\":\"draw\"},{\"data\":1,\"type\":\"wait\"},{\"data\":{\"count\":2,\"jumpTo\":0},\"type\":\"djnz\"}]}],\"headers\":{}}";
+
+    private const string SET_EXPLODE_PACKET = "{\"id\":\"v1/hardware/led_strips/set_pattern\",\"payload\":\"redflash\",\"headers\":{}}";
+
     // local register of which buttons are being pressed
     // axis - isActive
     private Dictionary<string, string> machineButtonsState = new Dictionary<string, string>(){
@@ -57,6 +61,7 @@ public class PlayerInputHandlerPlatformer : BaseInputHandler
             socket.OnOpen += () =>
             {
                 Debug.Log("Connection open!");
+                AddExplodeBlink();
             };
 
             socket.OnError += (e) =>
@@ -224,5 +229,26 @@ public class PlayerInputHandlerPlatformer : BaseInputHandler
         machineButtonsState["left"] = "inactive";
         machineButtonsState["right"] = "inactive";
         machineButtonsState["shoot"] = "inactive";
+    }
+
+    public async void SendWebSocketMessage(string msg)
+    {
+        if (socket.State == WebSocketState.Open)
+        {
+            // Sending plain text
+            await socket.SendText(msg);
+        }
+    }
+
+    private void AddExplodeBlink()
+    {
+        Debug.Log("adding");
+        SendWebSocketMessage(ADD_EXPLODE_PACKET);
+    }
+
+    public void PlayExplodeBlink()
+    {
+        Debug.Log("playing");
+        SendWebSocketMessage(SET_EXPLODE_PACKET);
     }
 }
