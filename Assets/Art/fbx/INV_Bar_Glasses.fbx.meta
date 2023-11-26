@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 489dc6c78819e344db385fe1223a1f53
+guid: 18fb8f977b21f8b489dceccc4d0c328d
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
@@ -7,28 +7,8 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: INV_Wall_Vinho
-    second: {fileID: 2100000, guid: 634f7a314cd3038409f3378620d344c1, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
       name: M_Screen
-    second: {fileID: 2100000, guid: 127bfb4dd99ace04c9d9e1ac8d69de9d, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: SlotMahcine
-    second: {fileID: 2100000, guid: eda630912c92a484bb23b2cc13ff622d, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: lambert1.001
-    second: {fileID: 2100000, guid: 7bbb989c55e768d4e8acfe874693359d, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: lambert1.005
-    second: {fileID: 2100000, guid: c32da8d8025cc564dbb77d5a8c8185e3, type: 2}
+    second: {fileID: 2100000, guid: 0d46b94fd1129674a8d68039f270d54f, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

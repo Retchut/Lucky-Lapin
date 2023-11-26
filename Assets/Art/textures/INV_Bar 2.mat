@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: INV_Bar 1
+  m_Name: INV_Bar 2
   m_Shader: {fileID: 4800000, guid: 933532a4fcc9baf4fa0491de14d08ed7, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -27,11 +27,11 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _BaseMap:
-        m_Texture: {fileID: 2800000, guid: bbd9c679ad67acb4bb55bc0877e857d5, type: 3}
+        m_Texture: {fileID: 2800000, guid: 56223625906ecdb47b523258254a1003, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
-        m_Texture: {fileID: 2800000, guid: 5a8bd406ef16f824391190f2c2fbb350, type: 3}
+        m_Texture: {fileID: 2800000, guid: 5b2e6f6e5df54b845bc029179f07b488, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _DetailAlbedoMap:
@@ -51,11 +51,11 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: bbd9c679ad67acb4bb55bc0877e857d5, type: 3}
+        m_Texture: {fileID: 2800000, guid: 56223625906ecdb47b523258254a1003, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
-        m_Texture: {fileID: 2800000, guid: e26332fe7e02a3d4db9b09d8b5571914, type: 3}
+        m_Texture: {fileID: 2800000, guid: e101e48d72a1ea84f80e4445702014d7, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _OcclusionMap:
