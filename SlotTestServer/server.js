@@ -80,6 +80,7 @@ server.on("connection", (socket) => {
     } else if (char == "l") {
       btn = buttons.shoot;
     }
+    console.log(btn);
 
     if (btn != null) {
       console.log(btn.button, "|", btn.active ? "inactive" : "active");
@@ -88,7 +89,7 @@ server.on("connection", (socket) => {
         btn.active ? "inactive" : "active"
       );
       btn.active = !btn.active;
-      sendPayload(payload);
+      sendPayload(socket, payload);
     }
 
     if (char === "p") process.exit();
