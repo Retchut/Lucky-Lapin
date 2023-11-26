@@ -5,25 +5,31 @@ const WebSocket = require("ws");
 const PORT = 3333;
 const server = new WebSocket.Server({ port: PORT });
 
+LEFT_BTN = "play_8";
+RIGHT_BTN = "play_38";
+UP_BTN = "bet_2";
+DOWN_BTN = "play_18";
+PLAY_BTN = "play";
+
 const buttons = {
   left: {
-    button: "play_8",
+    button: LEFT_BTN,
     active: false,
   },
   right: {
-    button: "play_38",
+    button: RIGHT_BTN,
     active: false,
   },
   up: {
-    button: "bet_2",
+    button: UP_BTN,
     active: false,
   },
   down: {
-    button: "play_18",
+    button: DOWN_BTN,
     active: false,
   },
   shoot: {
-    button: "play",
+    button: PLAY_BTN,
     active: false,
   },
 };
@@ -44,6 +50,9 @@ const getPayload = (button, state) => {
     },
   };
 };
+
+const sendPayload = (socket, payloadJSON) =>
+  socket.send(JSON.stringify(payloadJSON));
 
 server.on("connection", (socket) => {
   console.log("Client connected");
@@ -82,11 +91,21 @@ server.on("connection", (socket) => {
         btn.active ? "inactive" : "active"
       );
       btn.active = !btn.active;
-      socket.send(JSON.stringify(payload));
+      sendPayload(payload);
     }
 
     if (char === "p") process.exit();
   });
+
+  // Test multiple equal payloads
+  // setTimeout(() => sendPayload(socket, getPayload(RIGHT_BTN, "active")), 3000);
+  // setTimeout(() => sendPayload(socket, getPayload(RIGHT_BTN, "active")), 4000);
+  // setTimeout(() => sendPayload(socket, getPayload(RIGHT_BTN, "active")), 5000);
+  // setTimeout(() => sendPayload(socket, getPayload(RIGHT_BTN, "active")), 6000);
+  // setTimeout(() => sendPayload(socket, getPayload(RIGHT_BTN, "inactive")), 8000);
+  // setTimeout(() => sendPayload(socket, getPayload(RIGHT_BTN, "inactive")), 9000);
+  // setTimeout(() => sendPayload(socket, getPayload(RIGHT_BTN, "inactive")), 10000);
+  // setTimeout(() => sendPayload(socket, getPayload(RIGHT_BTN, "inactive")), 11000);
 });
 
 console.log("WebSocket server is running on port " + PORT);
