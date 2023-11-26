@@ -11,7 +11,7 @@
 /[Bb]uilds/*
 
 !Build/app.genisys.lua
-!Build/icon.jpg
+!Build/logo.png
 
 # MemoryCaptures can get excessive in size.
 # They also could contain extremely sensitive data

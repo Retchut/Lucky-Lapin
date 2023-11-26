@@ -96,10 +96,10 @@ public class BaseInputHandler : MonoBehaviour
             button.Pressed();
     }
 
-    protected void IncrementMachineInputVector2(Button<Vector2> button, Vector2 value)
+    protected void SetMachineInputVector2(Button<Vector2> button, Vector2 value)
     {
         var oldValue = button.value; // This is done to prevent OnPressed incorrect value reads  (if value was set before the invoke)
-        button.value += value;
+        button.value = value;
 
         if (value.magnitude == 0)
             button.Released();

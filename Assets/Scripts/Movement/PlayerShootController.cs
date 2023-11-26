@@ -7,6 +7,10 @@ public class PlayerShootController : MonoBehaviour
 {
     public static PlayerShootController instance;
 
+    public SoundUtils.Sound[] gunshotSounds;
+    public SoundUtils.Sound explosionSound;
+    public AudioSource gunshotAudioSource;
+
     public PlayerVFXManagerPlatformer vfxManager;
 
     public PlayerInputHandlerPlatformer inputHandler;
@@ -31,8 +35,10 @@ public class PlayerShootController : MonoBehaviour
     public LayerMask shootLayers = ~1;
 
     public float lightSeconds = 0.1f;
-    public UEventHandler eventHandler;
+    public UEventHandler eventHandler=new UEventHandler();
 
+    public LayerMask layerMask;
+    public float radius;
 
     private void Awake()
     {
@@ -41,26 +47,26 @@ public class PlayerShootController : MonoBehaviour
     }
     void Start()
     {
-        //inputHandler.input_interact.Onpressed.Subscribe(eventHandler, Shoot);
+        inputHandler.input_interact.Onpressed.Subscribe(eventHandler, Shoot);
     }
 
 
     private void Update()
     {
-        Shoot();
+        //Shoot();
     }
 
     public void Shoot()
     {
 
 
-        if (inputHandler.input_interact.value <= 0) return;
+        //if (inputHandler.input_interact.value <= 0) return;
 
-        if (!RolletUIManager.instance.TestShoot()) return;
+        //if (!RolletUIManager.instance.TestShoot()) return;
 
-        float currentShootTime = Time.time;
+        //float currentShootTime = Time.time;
 
-        if (lastShootTime != -1 && currentShootTime - lastShootTime <= fireRate) return;
+        //if (lastShootTime != -1 && currentShootTime - lastShootTime <= fireRate) return;
 
 
         var bullet = GameObject.Instantiate(bulletPlaceholder);
@@ -120,12 +126,14 @@ public class PlayerShootController : MonoBehaviour
         bullet.transform.position = transform.position + direction * startingDistance + offset;
         bullet.transform.forward = finalDirection;
 
-        lastShootTime = currentShootTime;
+        //lastShootTime = currentShootTime;
         ShowEffect();
     }
 
     public async void ShowEffect()
     {
+        gunshotAudioSource.PlayRandomSound(gunshotSounds);
+
         RolletUIManager.instance.Next();
         shotLight.enabled = true;
         await Task.Delay(System.TimeSpan.FromSeconds(lightSeconds));
@@ -134,12 +142,30 @@ public class PlayerShootController : MonoBehaviour
 
     public void BlowUp()
     {
+        gunshotAudioSource.PlaySound(explosionSound);
         CameraShaker.instance.Shake(.4f);
 
         movController.Knockback(-gunModel.forward);
 
         vfxManager.Explode();
-        HeartsUiManager.instance.PutToSoro();
+        HeartsUiManager.instance.TakeHit();
+
+        var cols = Physics.OverlapSphere(gunModel.transform.position, radius, layerMask);
+
+
+        foreach (var col in cols)
+        {
+            EnemnyLogicManager a = null;
+            if (col.gameObject.TryGetComponent<EnemnyLogicManager>(out a))
+            {
+                a.logicAnimator.SetTrigger("Death");
+            };
+        }
     }
+    private void OnDrawGizmos()
+    {
+        //Gizmos.DrawSphere(gunModel.transform.position, radius);
+    }
+
 
 }

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3298692212090462687}
   - component: {fileID: 5273115976392217279}
   - component: {fileID: 3611032701311874138}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Bullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -63,7 +63,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -80,7 +80,7 @@ GameObject:
   - component: {fileID: 7163954201762054875}
   - component: {fileID: 3911735074644462319}
   - component: {fileID: 224713365020240447}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cube (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -163,7 +163,7 @@ GameObject:
   - component: {fileID: 7552371453386054920}
   - component: {fileID: 3864189083704623057}
   - component: {fileID: 2032695864646271117}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cube (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}

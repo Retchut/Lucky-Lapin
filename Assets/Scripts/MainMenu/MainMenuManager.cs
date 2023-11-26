@@ -22,11 +22,20 @@ public class MainMenuManager : MonoBehaviour
     [Scene]
     public string gameScene;
 
+    bool flag;
     //int menuState = -1;
     CanvasGroup currentGroup;
     void Awake()
     {
         currentGroup = mainGroup;
+    }
+
+    private void Update()
+    {
+        if (Input.anyKeyDown)
+        {
+            GoToGame();
+        }
     }
 
     private void Start()
@@ -53,6 +62,9 @@ public class MainMenuManager : MonoBehaviour
 
     public async void GoToGame()
     {
+        if (flag) return;
+
+        flag = true;
         CursorManager.instance.HideCursor();
         SoundManager.instance.PlaySFX(fadeOutSound);
         SoundManager.instance.PlaySFX(clickSound);

@@ -8,6 +8,8 @@ using System.Threading.Tasks;
 
 public class RolletUIManager : MonoBehaviour
 {
+    public AudioSource source;
+    public SoundUtils.Sound reloadSound;
     public static RolletUIManager instance;
     public RectTransform rollet;
 
@@ -120,6 +122,8 @@ public class RolletUIManager : MonoBehaviour
         reloadTween = rollet.DORotate(Vector3.forward * rotation, reloadDuration * times, RotateMode.LocalAxisAdd).SetEase(reloadEase);
 
         currentIndex = 0;
+
+        source.PlaySound(reloadSound);
 
         for (int i = 0; i < bullets.Length; i++)
         {

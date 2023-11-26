@@ -8,6 +8,7 @@ using static UEventHandler;
 [RequireComponent(typeof(Rigidbody))]
 public class PlayerMovControllerFloat : MonoBehaviour
 {
+    public static PlayerMovControllerFloat instance;
 
     public PlayerInputHandlerPlatformer inputHandler;
     [ReadOnly] public Rigidbody rb;
@@ -76,6 +77,7 @@ public class PlayerMovControllerFloat : MonoBehaviour
 
     private void Awake()
     {
+        instance = this;
         rb = GetComponent<Rigidbody>();
 
         //In case the user inputs a float height 

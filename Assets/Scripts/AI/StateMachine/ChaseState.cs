@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ChaseState : LogicMachineBehaviour<EnemnyLogicManager>
 {
-    public float stopDistance=1;
+    public float stopDistance = 1;
     public float chaseMaxDistance = 20;
     public float chaseSpeed;
 
@@ -12,6 +12,10 @@ public class ChaseState : LogicMachineBehaviour<EnemnyLogicManager>
     public float maxY = 3;
     public float currentY;
 
+    public SoundUtils.Sound[] walkingSounds;
+
+    public float footstepRate = 0.5f;
+    float lastShootTime;
     public override void OnAwake()
     {
     }
@@ -32,13 +36,15 @@ public class ChaseState : LogicMachineBehaviour<EnemnyLogicManager>
 
         var currentPos = manager.transform.position;
 
+        Footsteps();
+
         currentY = currentPos.y;
         if (currentY > maxY) return;
 
         var distance = Vector3.Distance(playerPos, currentPos);
         if (distance <= stopDistance)
         {
-            logicAnimator.SetBool("Attack",true);
+            logicAnimator.SetBool("Attack", true);
             return;
 
         }
@@ -51,6 +57,18 @@ public class ChaseState : LogicMachineBehaviour<EnemnyLogicManager>
         transform.forward = Vector3.Slerp(transform.transform.forward, direction, Time.deltaTime * turnSpeed);
 
         transform.position += transform.forward * chaseSpeed * Time.deltaTime;
+    }
+
+    void Footsteps()
+    {
+        float currentShootTime = Time.time;
+
+        if (lastShootTime != -1 && currentShootTime - lastShootTime <= footstepRate) return;
+
+
+        manager.aSource.PlayRandomSound(walkingSounds);
+
+        lastShootTime = currentShootTime;
     }
 
 }
