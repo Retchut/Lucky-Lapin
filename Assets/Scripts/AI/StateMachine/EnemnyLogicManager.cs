@@ -7,6 +7,8 @@ public class EnemnyLogicManager : LogicMachineManager
 
     public PlayerMovControllerFloat playerMovController;
     public TriggerChecker triggerChecker;
+    public Collider mainCollider;
+    public Rigidbody body;
 
     public override void OnAwake()
     {
@@ -21,6 +23,12 @@ public class EnemnyLogicManager : LogicMachineManager
     // Update is called once per frame
     void Update()
     {
+
+    }
+
+    public void BulletHit()
+    {
+        logicAnimator.SetTrigger("Death");
 
     }
 
