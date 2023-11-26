@@ -146,7 +146,8 @@ public class PlayerShootController : MonoBehaviour
         movController.Knockback(-gunModel.forward);
 
         vfxManager.Explode();
-        HeartsUiManager.instance.PutToSoro();
+        // HeartsUiManager.instance.PutToSoro();
+        HeartsUiManager.instance.TakeHit();
     }
 
 }
