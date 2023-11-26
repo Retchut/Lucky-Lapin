@@ -12,6 +12,7 @@ public class EnemnyLogicManager : LogicMachineManager
     public Rigidbody body;
     public VisualEffect vfx;
     public Animator animator;
+    public ChipThrower chipThrower;
 
     public MeshRenderer[] colorMeshes;
     public Color[] meshRandomColor;
@@ -19,11 +20,13 @@ public class EnemnyLogicManager : LogicMachineManager
     public MeshRenderer cardMesh;
     public Texture2D[] spriteRandomCard;
 
+    public Color randomColor;
     public override void OnAwake()
     {
         if (colorMeshes != null && meshRandomColor != null && meshRandomColor.Length> 0)
         {
-            Color randomColor = meshRandomColor[Random.Range(0, meshRandomColor.Length)];
+            randomColor = meshRandomColor[Random.Range(0, meshRandomColor.Length)];
+
             for (int i = 0; i < colorMeshes.Length; i++)
             {
                 if (i == colorMeshes.Length - 1)

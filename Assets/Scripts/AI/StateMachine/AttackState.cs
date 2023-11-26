@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -9,6 +10,7 @@ public class AttackState : LogicMachineBehaviour<EnemnyLogicManager>
     public float attackDelay = 1.5f;
     public bool isMelee = true;
     public string attackTrigger;
+    public Ease rotationEase = Ease.InOutBack;
 
     public override void OnAwake()
     {
@@ -24,27 +26,48 @@ public class AttackState : LogicMachineBehaviour<EnemnyLogicManager>
         direction.y = 0;
         direction.Normalize();
 
-        manager.animator.SetTrigger(attackTrigger);
 
-        manager.mainCollider.enabled = false;
-        manager.body.isKinematic = true;
+        if (isMelee)
+        {
+
+            manager.animator.SetTrigger(attackTrigger);
+
+            manager.mainCollider.enabled = false;
+            manager.body.isKinematic = true;
+
+        }
+        else
+        {
+            transform.DOLookAt(manager.playerMovController.transform.position, attackDelay, AxisConstraint.Y).SetEase(rotationEase);
+        }
 
         await Task.Delay(System.TimeSpan.FromSeconds(attackDelay));
 
-        //Debug.Log("AttacK");
-        CameraShaker.instance.Shake(0.25f, true);
-
-        if (manager.triggerChecker.hasObject)
+        if (isMelee)
         {
-            manager.playerMovController.Knockback(direction);
-            HeartsUiManager.instance.TakeHit();
+
+            //Debug.Log("AttacK");
+            CameraShaker.instance.Shake(0.25f, true);
+
+            if (manager.triggerChecker.hasObject)
+            {
+                manager.playerMovController.Knockback(direction);
+                HeartsUiManager.instance.TakeHit();
+            }
+
+        }
+        else
+        {
+            manager.chipThrower.Throw();
         }
 
         await Task.Delay(System.TimeSpan.FromSeconds(attackDuration));
+        if (isMelee)
+        {
+            manager.mainCollider.enabled = true;
+            manager.body.isKinematic = false;
+        }
         logicAnimator.SetBool("Attack", false);
-        manager.mainCollider.enabled = true;
-        manager.body.isKinematic = false;
-
 
     }
 
