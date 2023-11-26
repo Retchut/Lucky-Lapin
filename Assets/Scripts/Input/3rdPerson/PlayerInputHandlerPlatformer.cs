@@ -136,51 +136,71 @@ public class PlayerInputHandlerPlatformer : BaseInputHandler
         }
 
         // movement controls and failsafe
-        Vector2 newInput = new Vector2(0, 0);
+        // toggle buttons
         switch (buttonName)
         {
             case UP_BTN_ALT:
             case UP_BTN:
                 // up
-                if (CanToggleButton("up", buttonState))
+                if (!CanToggleButton("up", buttonState))
                 {
-                    SetMachineButtonState("up", buttonState);
-                    newInput.y += (buttonState == "active") ? 1.0f : -1.0f;
+                    return;
                 }
+                SetMachineButtonState("up", buttonState);
                 break;
             case DOWN_BTN_ALT:
             case DOWN_BTN:
                 //down
-                if (CanToggleButton("down", buttonState))
+                if (!CanToggleButton("down", buttonState))
                 {
-                    SetMachineButtonState("down", buttonState);
-                    newInput.y += (buttonState == "active") ? -1.0f : 1.0f;
+                    return;
                 }
+                SetMachineButtonState("down", buttonState);
                 break;
             case LEFT_BTN_ALT:
             case LEFT_BTN:
                 // left
-                if (CanToggleButton("left", buttonState))
+                if (!CanToggleButton("left", buttonState))
                 {
-                    SetMachineButtonState("left", buttonState);
-                    newInput.x += (buttonState == "active") ? -1.0f : 1.0f;
+                    return;
                 }
+                SetMachineButtonState("left", buttonState);
                 break;
             case RIGHT_BTN_ALT:
             case RIGHT_BTN:
                 // right
-                if (CanToggleButton("right", buttonState))
+                if (!CanToggleButton("right", buttonState))
                 {
-                    SetMachineButtonState("right", buttonState);
-                    newInput.x += (buttonState == "active") ? 1.0f : -1.0f;
+                    return;
                 }
+                SetMachineButtonState("right", buttonState);
                 break;
             default:
                 Debug.LogWarning("Unhandled button: " + buttonName + ": " + buttonState);
                 return;
         }
-        if (newInput != Vector2.zero)
-            IncrementMachineInputVector2(input_move, newInput);
+
+        // build input
+        Vector2 newInput = new Vector2(0, 0);
+        if (machineButtonsState["left"] == "active")
+        {
+            newInput.x -= 1.0f;
+        }
+        if (machineButtonsState["right"] == "active")
+        {
+            newInput.x += 1.0f;
+        }
+        if (machineButtonsState["down"] == "active")
+        {
+            newInput.y -= 1.0f;
+        }
+        if (machineButtonsState["up"] == "active")
+        {
+            newInput.y += 1.0f;
+        }
+
+        // send to movement vector
+        SetMachineInputVector2(input_move, newInput);
     }
 
     // only called when buttonState is either "active" or "inactive" - no need to verify for any other case
