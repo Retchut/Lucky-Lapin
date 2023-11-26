@@ -9,7 +9,7 @@ using UnityEngine;
 [RequireComponent(typeof(Animator))]
 public abstract class LogicMachineManager : MonoBehaviour
 {
-    protected Animator logicAnimator;
+    public Animator logicAnimator;
 
     private const int MAX_WAIT_TICKS = 50;
 

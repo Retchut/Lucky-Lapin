@@ -35,7 +35,7 @@ public class PlayerShootController : MonoBehaviour
     public LayerMask shootLayers = ~1;
 
     public float lightSeconds = 0.1f;
-    public UEventHandler eventHandler;
+    public UEventHandler eventHandler=new UEventHandler();
 
     public LayerMask layerMask;
     public float radius;
@@ -152,14 +152,20 @@ public class PlayerShootController : MonoBehaviour
 
         var cols = Physics.OverlapSphere(gunModel.transform.position, radius, layerMask);
 
+
         foreach (var col in cols)
         {
             EnemnyLogicManager a = null;
             if (col.gameObject.TryGetComponent<EnemnyLogicManager>(out a))
             {
-
+                a.logicAnimator.SetTrigger("Death");
             };
         }
     }
+    private void OnDrawGizmos()
+    {
+        //Gizmos.DrawSphere(gunModel.transform.position, radius);
+    }
+
 
 }

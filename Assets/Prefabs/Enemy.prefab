@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 777585363770838257}
   - component: {fileID: 6409403141820490129}
   - component: {fileID: 970580541695288716}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Mov Controller
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -73,6 +73,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b57d07106049d204b8796d3931785840, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  logicAnimator: {fileID: 0}
   playerMovController: {fileID: 0}
   triggerChecker: {fileID: 7737321050945428680}
   mainCollider: {fileID: 6409403141820490129}
