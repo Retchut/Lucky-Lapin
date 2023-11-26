@@ -5,13 +5,19 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/MainMenu/MainMenu.unity
     guid: b5e696a34bcdcf84d9a86fbcf058cf2f
   - enabled: 0
     path: Assets/Scenes/Score/Score.unity
     guid: 4e90645189296aa438d980431422cfec
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Test Fields/CharacterMovGun.unity
     guid: 4280dc61ccaa41d43a6bb935d56eabd6
+  - enabled: 1
+    path: Assets/Scenes/Test Fields/CharacterMovGun_Andre.unity
+    guid: 477185b4a4d6605499c118a2665d0b1f
+  - enabled: 1
+    path: Assets/Scenes/Test Fields/CharacterMovGun_Andre_2ndFloor.unity
+    guid: 2fbfe5ed68d16cc41808ab6356259968
   m_configObjects: {}
