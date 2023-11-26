@@ -106,6 +106,17 @@ public class BaseInputHandler : MonoBehaviour
         else if (oldValue.magnitude == 0)
             button.Pressed();
     }
+
+    protected void SetMachineInputVector2(Button<Vector2> button, Vector2 value)
+    {
+        var oldValue = button.value; // This is done to prevent OnPressed incorrect value reads  (if value was set before the invoke)
+        button.value = value;
+
+        if (value.magnitude == 0)
+            button.Released();
+        else if (oldValue.magnitude == 0)
+            button.Pressed();
+    }
     protected void SetInputInfo(Button<float> button, InputValue inputValue)
     {
         var value = inputValue.Get<float>();
