@@ -17,7 +17,7 @@ public class BaseInputHandler : MonoBehaviour
 
     [SerializeField] private string[] devices;
 
-    protected virtual void Awake()
+    protected virtual async void Awake()
     {
         input = GetComponent<PlayerInput>();
 
